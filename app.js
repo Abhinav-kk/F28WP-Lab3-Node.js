@@ -4,9 +4,19 @@ const express = require('express');
 //creating app
 const app = express();
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.get('/',(req,res) => {
     res.sendFile("public/index.html",{root: __dirname});
+});
+
+//Render the contacts file in the /contacts route
+app.get("/login", (req, res) => {
+    res.render('login');
+});
+
+//Render the contacts file in the /contacts route
+app.get("/register", (req, res) => {
+    res.render('register');
 });
 
 //make the app listen on port
@@ -16,7 +26,7 @@ const server = app.listen(port,() => {
 });
 
 //pass requests to the router middleware
-const router = require('./routes/post');
+const router = require('./routes/apis');
 app.use(router);
 
 //handling static HTML and EJS templates
