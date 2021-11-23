@@ -1,18 +1,5 @@
-class Client {
-    constructor(username, password, num, society, contact, address, zipcode, city, phone, fax, max_outstanding) {
-        this.username = username;
-        this.password = password;
-        this.num = num;
-        this.society = society;
-        this.contact = contact;
-        this.address = address;
-        this.zipcode = zipcode;
-        this.city = city;
-        this.phone = phone;
-        this.fax = fax;
-        this.max_outstanding = max_outstanding;
-    }
-}
+const { Client } = require("../models/entities");
+
 
 const loginControl = (request, response) => {
     const clientServices = require('../services/clientServices');
@@ -48,17 +35,26 @@ const registerControl = (request, response) => {
     const clientServices = require('../services/clientServices');
 
     let username = request.body.username;
-    let password = request.body.passwsord;
+    let password = request.body.password;
     let society = request.body.society;
     let contact = request.body.contact;
-    let address = request.body.address;
+    let addres = request.body.addres;
     let zipcode = request.body.zipcode;
     let city = request.body.city;
     let phone = request.body.phone;
     let fax = request.body.fax;
     let max_outstanding = request.body.max_outstanding;
-    let client = new Client(username, password, 0, society, contact, address, zipcode, city, phone, fax, max_outstanding);
-
+    let client = new Client(username, password, 0, society, contact, addres, zipcode, city, phone, fax, max_outstanding);
+    console.log("username:" +username);
+    console.log("password:" +password);
+    console.log("society:" +society);
+    console.log("contact:" +contact);
+    console.log("address:" +addres);
+    console.log("zipcode:" +zipcode);
+    console.log("city:" +city);
+    console.log("phone:" +phone);
+    console.log("fax:" +fax);
+    console.log("max_outstanding:" +max_outstanding);
     clientServices.registerService(client, function(err, exists, insertedID) {
         console.log("User from register service :" + insertedID);
         if (exists) {
@@ -84,28 +80,30 @@ const getClients = (request, response) => {
 };
 
 const getClient = (request, response) => {
+    const clientServices = require('../services/clientServices');
     let username = request.params.username;
     let num_client;
 
     clientServices.searchUsernameService(username, function(err, rows) {
         num_client = rows[0].num_client
         clientServices.searchNumclientService(num_client, function(err, rows) {
-            console.log(rows)
+            console.log(rows[0])
             response.render('clientDetails', {
                 username: username,
                 clientNumber: rows[0].num_client,
                 society: rows[0].society,
                 contact: rows[0].contact,
-                address: rows[0].addres,
+                addres: rows[0].addres,
                 zipcode: rows[0].zipcode,
                 city: rows[0].city,
                 phone: rows[0].phone,
                 fax: rows[0].fax,
-                maxOutstanding: rows[0].max_outstanding,
+                max_outstanding: rows[0].max_outstanding,
             });
             //let client = new Client(rows[0].num_client, rows[0].society, rows[0].contact, rows[0].addres, rows[0].zipcode, rows[0].city, rows[0].phone, rows[0].fax, rows[0].max_outstanding);
         });
     });
+
 };
 
 module.exports = {
@@ -113,4 +111,4 @@ module.exports = {
     registerControl,
     getClients,
     getClient
-}; 
+};

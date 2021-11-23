@@ -1,21 +1,8 @@
+const { Client } = require("../models/entities");
+
 const clientDAO = require('../db/clientDAO');
 const bcrypt = require("bcryptjs");
 
-class Client {
-    constructor(username, password, num, society, contact, address, zipcode, city, phone, fax, max_outstanding) {
-        this.username = username;
-        this.password = password;
-        this.num = num;
-        this.society = society;
-        this.contact = contact;
-        this.address = address;
-        this.zipcode = zipcode;
-        this.city = city;
-        this.phone = phone;
-        this.fax = fax;
-        this.max_outstanding = max_outstanding;
-    }
-}
 
 const loginService = (typedUsername, typedPassword, callback) => {
     //check if the user is in the DB
@@ -25,7 +12,7 @@ const loginService = (typedUsername, typedPassword, callback) => {
         }
         if (rows.length == 0) {
             //the user is not in the DB
-            console.log("Unknown client, Please click to register");
+            console.log("Unkown client, Please click to register");
             callback(null, false, null);
         } else {
             //check if password match...
@@ -62,6 +49,7 @@ const registerService = (client, callback) => {
 
     //check if the user is in the DB
     clientDAO.findByUsername(client.username, function(err, rows) {
+        console.log("******************************client username"+client.username)
         if (err) {
             throw err;
         }
@@ -112,6 +100,7 @@ const searchUsernameService = function(username, callback) {
 }
 
 const deleteService = function(num_client, callback) {
+    //to be completed
 };
 
 module.exports = {
@@ -121,4 +110,4 @@ module.exports = {
     searchService,
     deleteService,
     searchUsernameService,
-}; 
+};
