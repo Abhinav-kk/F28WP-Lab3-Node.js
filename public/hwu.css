@@ -5,6 +5,8 @@ root {
 a {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: #116be0;
+    font-size: 22px;
+    padding-right: 2em;
     text-decoration: none;
 }
 
@@ -39,7 +41,7 @@ a.lien:active {
 }
 
 .banner {
-    background-color: #cc0033;
+    background-color: #1d8613;
     height: 80px;
 }
 
@@ -52,15 +54,16 @@ a.lien:active {
 
 .title {
     font-family: serif;
-    font-size: 14px;
+    font-size: 28px;
     text-align: center;
     letter-spacing: 20px;
     vertical-align: middle;
-    color: #0a0ae4;
+    text-align: center;
+    color: #1df8f8;
 }
 
 .menu {
-    background-color: #9999ff;
+    background-color: #b5a2b9;
 }
 
 .message {
@@ -80,7 +83,7 @@ a.lien:active {
 
 .content {
     font-family: cursive;
-    font-size: 12px;
+    font-size: 18px;
 }
 
 #catalog thead th {
@@ -99,7 +102,8 @@ a.lien:active {
     background-color: rgb(233, 232, 232);
     text-align: center;
     clear: both;
+    font-size: x-large;
     position: relative;
-    height: 20px;
+    height: 30px;
     margin-top: -20px;
 }
